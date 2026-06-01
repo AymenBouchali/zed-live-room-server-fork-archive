@@ -1,6 +1,11 @@
-# Edumeet room server
+# Zed Live room server
 
-This is the room server service for the Edumeet project.
+This is the room server service for **Zed Live**, a self-hosted video conferencing product built on top of [eduMEET](https://github.com/edumeet).
+
+This repository is a fork of [`edumeet/edumeet-room-server`](https://github.com/edumeet/edumeet-room-server). Keep `upstream` pointed at eduMEET so we can pull signaling and security updates while maintaining Zed Live-specific room behavior here.
+
+The Docker stack for this service lives in [`zed-live-docker`](https://github.com/AymenBouchali/zed-live-docker).
+
 It handles signaling to and from client and media node services.
 
 ![](img/edumeet-room-server.drawio.png)
@@ -33,7 +38,7 @@ $ DEBUG=edumeet:* yarn start
 ```
 
 ### Docker
-https://github.com/edumeet/edumeet-docker/tree/main has guidelines for running all eduMEET-components as docker containers.
+[`zed-live-docker`](https://github.com/AymenBouchali/zed-live-docker) has guidelines for running all Zed Live / eduMEET components as Docker containers.
 To build just edumeet-room-server you can use the included `./Dockerfile` here in this repo.
 
 Edit and change password/username to use with management-server in `./Dockerfile` 
