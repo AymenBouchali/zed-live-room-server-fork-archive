@@ -1,10 +1,13 @@
 # Zed Live room server
 
-This is the room server service for **Zed Live**, a self-hosted video conferencing product built on top of [eduMEET](https://github.com/edumeet).
+Signaling and room orchestration for **Zed Live**. Handles WebSocket signaling
+between the client and media nodes.
 
-This repository is a fork of [`edumeet/edumeet-room-server`](https://github.com/edumeet/edumeet-room-server). Keep `upstream` pointed at eduMEET so we can pull signaling and security updates while maintaining Zed Live-specific room behavior here.
-
-The Docker stack for this service lives in [`zed-live-docker`](https://github.com/AymenBouchali/zed-live-docker).
+> **Upstream:** [edumeet-room-server](https://github.com/edumeet/edumeet-room-server).
+> Keep `upstream` to pull security fixes. Customize room behavior here when
+> Zed Live needs differ from upstream.
+>
+> **Deploy with:** [`zed-live-docker`](https://github.com/AymenBouchali/zed-live-docker)
 
 It handles signaling to and from client and media node services.
 
@@ -21,7 +24,7 @@ Note that if you don't provide a value for `tls.cert` and `tls.key` the server w
 We use geo position based on client ipv4 address when doing load balancing.
 If you're running room-server service behind a reverse proxy, you need to forward client ipv4 address in http header `x-forwarded-for`.
 
-As ipv6 is not supported in [the library we use for geoip lookup](https://github.com/geoip-lite/node-geoip), deploying edumeet using ipv6 is not recommend.
+As ipv6 is not supported in [the library we use for geoip lookup](https://github.com/geoip-lite/node-geoip), deploying with ipv6 is not recommended.
 
 ### Running the service manually
 
@@ -38,19 +41,19 @@ $ DEBUG=edumeet:* yarn start
 ```
 
 ### Docker
-[`zed-live-docker`](https://github.com/AymenBouchali/zed-live-docker) has guidelines for running all Zed Live / eduMEET components as Docker containers.
-To build just edumeet-room-server you can use the included `./Dockerfile` here in this repo.
+[`zed-live-docker`](https://github.com/AymenBouchali/zed-live-docker) has guidelines for running all Zed Live components as Docker containers.
+To build the room server locally you can use the included `./Dockerfile` here in this repo.
 
 Edit and change password/username to use with management-server in `./Dockerfile` 
 
 Building: 
 ```bash 
-docker build . -t edumeet-room-server
+docker build . -t zed-live-room-server
 ```
 
 Running: 
 ```bash 
-docker run -v $(pwd)/config:/usr/src/app/config -p 8443:8443 -d edumeet-room-server
+docker run -v $(pwd)/config:/usr/src/app/config -p 8443:8443 -d zed-live-room-server
 ```
 ## Configuration properties
 
